@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "*.md"
+    - "!files/"
+
+website:
+  title: "Data viz. in R {{< fa chart-line >}}"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+      - href: slides_grid.qmd
+        text: "Slides {{< fa-brands fa-slideshare >}}"
+    right:
+      - href: pipeline/00-planning.qmd
+        text: "Planning {{< fa ruler >}}"
+
+format:
+  html:
+    theme:
+      - flatly
+      - html/custom.scss
+    css: html/styles.css
+    toc: true
+
+execute:
+  freeze: auto

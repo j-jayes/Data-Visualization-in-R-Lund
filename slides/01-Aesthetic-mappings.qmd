@@ -1,0 +1,111 @@
+---
+title: "Aesthetic mappings"
+format: revealjs
+---
+
+```{r}
+#| include: false
+#| echo: false
+
+knitr::opts_chunk$set(comment = "")
+library(tidyverse)
+library(lubridate)
+library(cowplot)
+library(colorspace)
+library(here)
+library(gt)
+
+theme_set(theme_gray(16)) # 16 for full width, 18 for half width 
+update_geom_defaults("point", list(size = 2)) # 2 for full width, 2.5 for half width
+
+```
+---
+
+:::{style="text-align: center; middle;"}
+
+<h2>Plots map data onto graphical elements</h2>
+
+:::
+
+## Dataset:
+Daily average temperatures for various locations
+
+```{r}
+#| echo: false
+sun_hours_long <- readxl::read_excel(here("slides", "data", "sun_times.xlsx"), skip = 2) %>% 
+  separate(day, into = c("day", "month", "year")) %>% 
+  separate(sunrise, into = c("sunrise_hour", "sunrise_min"), sep = "\\.") %>% 
+  separate(sunset, into = c("sunset_hour", "sunset_min"), sep = "\\.") %>% 
+  mutate(across(-city, parse_number)) %>% 
+  mutate(across(contains("min"), ~ 60/1000 * .x),
+         across(.cols = c(day, month, contains("hour")), ~ ifelse(nchar(.x) == 1, paste0("0", .x), .x))) %>% 
+  mutate(date = str_c(year, "-", month, "-", day),
+         date = ymd(date),
+         across(contains("min"), round),
+         sunrise_time = str_c(sunrise_hour, ":", sunrise_min),
+         sunset_time = str_c(sunset_hour, ":", sunset_min),
+         across(contains("time"), hm)) %>% 
+  select(city, date, contains("time")) %>% 
+  mutate(sun_hours = sunset_time - sunrise_time,
+         sun_hours_int = as.numeric(sun_hours),
+         city = factor(city,
+                       levels = c("Lund, Sweden",
+                                  "Panama City, Panama",
+                                  "Livingstone, Zambia",
+                                  "Cape Town, South Africa")))
+
+sun_hours_long %>%
+  select(city, date, sun_hours) %>%
+  head(10) %>%
+  gt() %>%
+  tab_header(title = "Sunrise and sunset time") %>%
+  cols_label(
+    city = "City",
+    date = "Date",
+    sun_hours = "Hours between sunrise and sunset"
+  )
+```
+
+## Sun hours mapped onto y position
+
+```{r}
+sun_hours_long %>%
+  mutate(sun_hours = as.numeric(sun_hours)) %>%
+  ggplot(aes(x = date, y = sun_hours, color = city)) +
+  geom_line(size = 1) +
+  scale_y_time() +
+  scale_color_manual(
+    name = NULL,
+    values = c("#E69F00", "#56B4E9", "#009E73", "#CC79A7")
+  ) +
+  theme_minimal_grid(16) +
+  labs(x = NULL, y = "Hours between sunrise and sunet")
+```
+
+## Sun hours mapped onto colour
+
+```{r}
+sun_hours_long %>%
+  mutate(
+    sun_hours = as.numeric(sun_hours) / 3600,
+    month = month(date, label = T)
+  ) %>%
+  group_by(city, month) %>%
+  summarise(mean_sun_hours = mean(sun_hours)) %>%
+  ggplot(aes(x = month, y = city, fill = mean_sun_hours)) +
+  geom_tile(width = .95, height = 0.95) + 
+  scale_fill_viridis_c(
+    option = "B", begin = 0.15, end = 0.98,
+    name = "Hours of sunlight"
+  ) + 
+  scale_x_discrete(name = "Month") +
+  scale_y_discrete(name = NULL) +
+  coord_fixed(expand = FALSE) +
+  theme_half_open(16) +
+  theme(
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    legend.title = element_text(size = 14)
+  )
+```
+

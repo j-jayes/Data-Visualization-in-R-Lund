@@ -1,0 +1,7 @@
+---
+title: "Slides"
+listing:
+  contents:
+    - "slides/*.qmd"
+  type: grid
+---

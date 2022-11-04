@@ -1,0 +1,27 @@
+---
+title: "Planning"
+format: html
+image: "preview_img/00-planning.jfif"
+---
+
+## What remains to be planned?
+
+### Motivation
+
+Motivate for a course in data visualization. 
+
+- What do students get out of it?
+
+- How does the department benefit?
+
+### Styling
+
+#### Images
+
+I like the idea of using gpt-3 for making preview images.
+
+I will use a consistent prompt to get images in a similar style.
+
+I will settle on one, but let's try and find some good ideas in the meantime.
+
+"a still-life painting of [theme] in the style of Paul Cézanne, hyper realistic, beautiful, ArtStation trending"

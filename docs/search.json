@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Homepage",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "pipeline/00-planning.html",
+    "href": "pipeline/00-planning.html",
+    "title": "Planning",
+    "section": "",
+    "text": "Motivate for a course in data visualization.\n\nWhat do students get out of it?\nHow does the department benefit?\n\n\n\n\n\n\nI like the idea of using gpt-3 for making preview images.\nI will use a consistent prompt to get images in a similar style.\nI will settle on one, but let’s try and find some good ideas in the meantime.\n“a still-life painting of [theme] in the style of Paul Cézanne, hyper realistic, beautiful, ArtStation trending”"
+  },
+  {
+    "objectID": "slides/00-Introduction.html#quarto",
+    "href": "slides/00-Introduction.html#quarto",
+    "title": "Introduction",
+    "section": "Quarto",
+    "text": "Quarto\nQuarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see https://quarto.org/docs/presentations/."
+  },
+  {
+    "objectID": "slides/00-Introduction.html#bullets",
+    "href": "slides/00-Introduction.html#bullets",
+    "title": "Introduction",
+    "section": "Bullets",
+    "text": "Bullets\nWhen you click the Render button a document will be generated that includes:\n\nContent authored with markdown\nOutput from executable code"
+  },
+  {
+    "objectID": "slides/00-Introduction.html#code",
+    "href": "slides/00-Introduction.html#code",
+    "title": "Introduction",
+    "section": "Code",
+    "text": "Code\nWhen you click the Render button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n\n[1] 2"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#dataset",
+    "href": "slides/01-Aesthetic-mappings.html#dataset",
+    "title": "Aesthetic mappings",
+    "section": "Dataset:",
+    "text": "Dataset:\nDaily average temperatures for various locations\n\n\n\n\n\n\n  \n    \n      Sunrise and sunset time\n    \n    \n  \n  \n    \n      City\n      Date\n      Hours between sunrise and sunset\n    \n  \n  \n    Cape Town, South Africa\n2022-01-01\n14H 33M 0S\n    Cape Town, South Africa\n2022-01-02\n14H 32M 0S\n    Cape Town, South Africa\n2022-01-03\n14H 32M 0S\n    Cape Town, South Africa\n2022-01-04\n14H 31M 0S\n    Cape Town, South Africa\n2022-01-05\n14H 30M 0S\n    Cape Town, South Africa\n2022-01-06\n14H 29M 0S\n    Cape Town, South Africa\n2022-01-07\n14H 28M 0S\n    Cape Town, South Africa\n2022-01-08\n14H 27M 0S\n    Cape Town, South Africa\n2022-01-09\n14H 26M 0S\n    Cape Town, South Africa\n2022-01-10\n14H 25M 0S"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#sun-hours-mapped-onto-y-position",
+    "href": "slides/01-Aesthetic-mappings.html#sun-hours-mapped-onto-y-position",
+    "title": "Aesthetic mappings",
+    "section": "Sun hours mapped onto y position",
+    "text": "Sun hours mapped onto y position"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#sun-hours-mapped-onto-colour",
+    "href": "slides/01-Aesthetic-mappings.html#sun-hours-mapped-onto-colour",
+    "title": "Aesthetic mappings",
+    "section": "Sun hours mapped onto colour",
+    "text": "Sun hours mapped onto colour"
+  },
+  {
+    "objectID": "slides_grid.html",
+    "href": "slides_grid.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Aesthetic mappings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  }
+]
