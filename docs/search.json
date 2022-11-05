@@ -23,50 +23,148 @@
   {
     "objectID": "slides/00-Introduction.html#quarto",
     "href": "slides/00-Introduction.html#quarto",
-    "title": "Introduction",
+    "title": "00-Introduction",
     "section": "Quarto",
     "text": "Quarto\nQuarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see https://quarto.org/docs/presentations/."
   },
   {
     "objectID": "slides/00-Introduction.html#bullets",
     "href": "slides/00-Introduction.html#bullets",
-    "title": "Introduction",
+    "title": "00-Introduction",
     "section": "Bullets",
     "text": "Bullets\nWhen you click the Render button a document will be generated that includes:\n\nContent authored with markdown\nOutput from executable code"
   },
   {
     "objectID": "slides/00-Introduction.html#code",
     "href": "slides/00-Introduction.html#code",
-    "title": "Introduction",
+    "title": "00-Introduction",
     "section": "Code",
     "text": "Code\nWhen you click the Render button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n\n[1] 2"
   },
   {
     "objectID": "slides/01-Aesthetic-mappings.html#dataset",
     "href": "slides/01-Aesthetic-mappings.html#dataset",
-    "title": "Aesthetic mappings",
+    "title": "01 Aesthetic mappings",
     "section": "Dataset:",
-    "text": "Dataset:\nDaily average temperatures for various locations\n\n\n\n\n\n\n  \n    \n      Sunrise and sunset time\n    \n    \n  \n  \n    \n      City\n      Date\n      Hours between sunrise and sunset\n    \n  \n  \n    Cape Town, South Africa\n2022-01-01\n14H 33M 0S\n    Cape Town, South Africa\n2022-01-02\n14H 32M 0S\n    Cape Town, South Africa\n2022-01-03\n14H 32M 0S\n    Cape Town, South Africa\n2022-01-04\n14H 31M 0S\n    Cape Town, South Africa\n2022-01-05\n14H 30M 0S\n    Cape Town, South Africa\n2022-01-06\n14H 29M 0S\n    Cape Town, South Africa\n2022-01-07\n14H 28M 0S\n    Cape Town, South Africa\n2022-01-08\n14H 27M 0S\n    Cape Town, South Africa\n2022-01-09\n14H 26M 0S\n    Cape Town, South Africa\n2022-01-10\n14H 25M 0S"
+    "text": "Dataset:\nDaily average temperatures for various locations\n\n\n\n\n\n\n  \n    \n      Sunrise and sunset time\n    \n    \n  \n  \n    \n      City\n      Date\n      Hours between sunrise and sunset\n    \n  \n  \n    Cape Town, South Africa\n2022-01-01\n14.55000\n    Cape Town, South Africa\n2022-01-02\n14.53333\n    Cape Town, South Africa\n2022-01-03\n14.53333\n    Cape Town, South Africa\n2022-01-04\n14.51667\n    Cape Town, South Africa\n2022-01-05\n14.50000\n    Cape Town, South Africa\n2022-01-06\n14.48333\n    Cape Town, South Africa\n2022-01-07\n14.46667\n    Cape Town, South Africa\n2022-01-08\n14.45000\n    Cape Town, South Africa\n2022-01-09\n14.43333\n    Cape Town, South Africa\n2022-01-10\n14.41667"
   },
   {
     "objectID": "slides/01-Aesthetic-mappings.html#sun-hours-mapped-onto-y-position",
     "href": "slides/01-Aesthetic-mappings.html#sun-hours-mapped-onto-y-position",
-    "title": "Aesthetic mappings",
+    "title": "01 Aesthetic mappings",
     "section": "Sun hours mapped onto y position",
     "text": "Sun hours mapped onto y position"
   },
   {
     "objectID": "slides/01-Aesthetic-mappings.html#sun-hours-mapped-onto-colour",
     "href": "slides/01-Aesthetic-mappings.html#sun-hours-mapped-onto-colour",
-    "title": "Aesthetic mappings",
+    "title": "01 Aesthetic mappings",
     "section": "Sun hours mapped onto colour",
     "text": "Sun hours mapped onto colour"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#we-define-the-mapping-with-aes",
+    "href": "slides/01-Aesthetic-mappings.html#we-define-the-mapping-with-aes",
+    "title": "01 Aesthetic mappings",
+    "section": "We define the mapping with aes()",
+    "text": "We define the mapping with aes()\n\nggplot(\n  data = sun_hours,\n  mapping = aes(x = date, y = sun_hours, colour = city)\n) + geom_line(size = 2)"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#we-define-the-mapping-with-aes-1",
+    "href": "slides/01-Aesthetic-mappings.html#we-define-the-mapping-with-aes-1",
+    "title": "01 Aesthetic mappings",
+    "section": "We define the mapping with aes()",
+    "text": "We define the mapping with aes()\n\nggplot(\n  data = sun_hours,\n  mapping = aes(x = date, y = city, colour = sun_hours)\n) + geom_point(size = 5)"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#we-frequently-omit-argument-names",
+    "href": "slides/01-Aesthetic-mappings.html#we-frequently-omit-argument-names",
+    "title": "01 Aesthetic mappings",
+    "section": "We frequently omit argument names",
+    "text": "We frequently omit argument names\n\nLong form, all arguments are named:\n\nggplot(\n  data = sun_hours,\n  mapping = aes(x = date, y = city, colour = sun_hours)\n) + geom_point(size = 5)\n\n\nAbbreviated form, common arguments remain unnamed:\n\nggplot(sun_hours, aes(x = date, y = city, colour = sun_hours)) + \n  geom_point(size = 5)"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#the-geom-determines-how-the-data-is-shown",
+    "href": "slides/01-Aesthetic-mappings.html#the-geom-determines-how-the-data-is-shown",
+    "title": "01 Aesthetic mappings",
+    "section": "The geom determines how the data is shown",
+    "text": "The geom determines how the data is shown\n\nggplot(sun_hours, aes(date, sun_hours, colour = city)) + \n  geom_line(size = 2)"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#the-geom-determines-how-the-data-is-shown-1",
+    "href": "slides/01-Aesthetic-mappings.html#the-geom-determines-how-the-data-is-shown-1",
+    "title": "01 Aesthetic mappings",
+    "section": "The geom determines how the data is shown",
+    "text": "The geom determines how the data is shown\n\nggplot(sun_hours, aes(date, city, colour = sun_hours)) + \n  geom_point(size = 5)"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#the-geom-determines-how-the-data-is-shown-2",
+    "href": "slides/01-Aesthetic-mappings.html#the-geom-determines-how-the-data-is-shown-2",
+    "title": "01 Aesthetic mappings",
+    "section": "The geom determines how the data is shown",
+    "text": "The geom determines how the data is shown\n\nggplot(sun_hours, aes(month, sun_hours, colour = city)) + \n  geom_boxplot()"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#the-geom-determines-how-the-data-is-shown-3",
+    "href": "slides/01-Aesthetic-mappings.html#the-geom-determines-how-the-data-is-shown-3",
+    "title": "01 Aesthetic mappings",
+    "section": "The geom determines how the data is shown",
+    "text": "The geom determines how the data is shown\n\nggplot(sun_hours, aes(month, sun_hours, fill = city)) + \n  geom_violin() +\n  facet_wrap(vars(city))"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#colour-and-fill-apply-to-different-elements",
+    "href": "slides/01-Aesthetic-mappings.html#colour-and-fill-apply-to-different-elements",
+    "title": "01 Aesthetic mappings",
+    "section": "colour and fill apply to different elements",
+    "text": "colour and fill apply to different elements\n\n\ncolour applies colour to points, lines, text, borders\nfill applies colour to any filled areas"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#many-geoms-have-both-colour-and-fill-aesthetics",
+    "href": "slides/01-Aesthetic-mappings.html#many-geoms-have-both-colour-and-fill-aesthetics",
+    "title": "01 Aesthetic mappings",
+    "section": "Many geoms have both colour and fill aesthetics",
+    "text": "Many geoms have both colour and fill aesthetics\n\nggplot(sun_hours, aes(month, sun_hours, colour = city)) + \n  geom_boxplot()"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#many-geoms-have-both-colour-and-fill-aesthetics-1",
+    "href": "slides/01-Aesthetic-mappings.html#many-geoms-have-both-colour-and-fill-aesthetics-1",
+    "title": "01 Aesthetic mappings",
+    "section": "Many geoms have both colour and fill aesthetics",
+    "text": "Many geoms have both colour and fill aesthetics\n\nggplot(sun_hours, aes(month, sun_hours, fill = city)) + \n  geom_boxplot()"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#many-geoms-have-both-colour-and-fill-aesthetics-2",
+    "href": "slides/01-Aesthetic-mappings.html#many-geoms-have-both-colour-and-fill-aesthetics-2",
+    "title": "01 Aesthetic mappings",
+    "section": "Many geoms have both colour and fill aesthetics",
+    "text": "Many geoms have both colour and fill aesthetics\n\nggplot(sun_hours, aes(month, sun_hours, colour = city, fill = city)) + \n  geom_boxplot()"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#aesthetics-can-also-be-used-as-parameters-in-geoms",
+    "href": "slides/01-Aesthetic-mappings.html#aesthetics-can-also-be-used-as-parameters-in-geoms",
+    "title": "01 Aesthetic mappings",
+    "section": "Aesthetics can also be used as parameters in geoms",
+    "text": "Aesthetics can also be used as parameters in geoms\n\nggplot(sun_hours, aes(month, sun_hours, fill = city)) + \n  geom_boxplot(colour = \"midnightblue\")"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#aesthetics-can-also-be-used-as-parameters-in-geoms-1",
+    "href": "slides/01-Aesthetic-mappings.html#aesthetics-can-also-be-used-as-parameters-in-geoms-1",
+    "title": "01 Aesthetic mappings",
+    "section": "Aesthetics can also be used as parameters in geoms",
+    "text": "Aesthetics can also be used as parameters in geoms\n\nggplot(sun_hours, aes(month, sun_hours, colour = city)) + \n  geom_boxplot(fill = \"midnightblue\")"
+  },
+  {
+    "objectID": "slides/01-Aesthetic-mappings.html#further-reading",
+    "href": "slides/01-Aesthetic-mappings.html#further-reading",
+    "title": "01 Aesthetic mappings",
+    "section": "Further reading",
+    "text": "Further reading\n\nFundamentals of Data Visualization: Chapter 2: Visualizing data\nData Visualization—A Practical Introduction: Chapter 3: Make a plot\nggplot2 reference documentation\nggplot2 book\nggplot2 cheatsheet"
   },
   {
     "objectID": "slides_grid.html",
     "href": "slides_grid.html",
     "title": "Slides",
     "section": "",
-    "text": "Aesthetic mappings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "00 Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n01 Aesthetic mappings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

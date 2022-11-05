@@ -1,5 +1,5 @@
 ---
-title: "Introduction"
+title: "00 Introduction"
 format: revealjs
 image: "preview_img/00-planning.jfif"
 ---
@@ -22,5 +22,3 @@ When you click the **Render** button a presentation will be generated that inclu
 ```{r}
 1 + 1
 ```
-
-

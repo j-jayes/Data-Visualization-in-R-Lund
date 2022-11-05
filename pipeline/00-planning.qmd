@@ -2,6 +2,7 @@
 title: "Planning"
 format: html
 image: "preview_img/00-planning.jfif"
+favicon: "{{< fa chart-line >}}"
 ---
 
 ## What remains to be planned?

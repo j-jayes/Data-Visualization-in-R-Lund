@@ -1,11 +1,15 @@
 ---
-title: "Aesthetic mappings"
+title: "01 Aesthetic mappings"
 format: revealjs
+image: "preview_img/01-aesthetic-mappings.jfif"
+favicon: html/favicon.ico
 ---
 
 ```{r}
 #| include: false
 #| echo: false
+
+# a painting of a sunset over a blue mountain in the style of Hans Hartung, hyper realistic, beautiful, ArtStation trending
 
 knitr::opts_chunk$set(comment = "")
 library(tidyverse)
@@ -21,7 +25,9 @@ update_geom_defaults("point", list(size = 2)) # 2 for full width, 2.5 for half w
 ```
 ---
 
-:::{style="text-align: center; middle;"}
+:::{style="text-align: center;"}
+
+<br>
 
 <h2>Plots map data onto graphical elements</h2>
 
@@ -32,7 +38,7 @@ Daily average temperatures for various locations
 
 ```{r}
 #| echo: false
-sun_hours_long <- readxl::read_excel(here("slides", "data", "sun_times.xlsx"), skip = 2) %>% 
+sun_hours <- readxl::read_excel(here("slides", "data", "sun_times.xlsx"), skip = 2) %>% 
   separate(day, into = c("day", "month", "year")) %>% 
   separate(sunrise, into = c("sunrise_hour", "sunrise_min"), sep = "\\.") %>% 
   separate(sunset, into = c("sunset_hour", "sunset_min"), sep = "\\.") %>% 
@@ -47,15 +53,17 @@ sun_hours_long <- readxl::read_excel(here("slides", "data", "sun_times.xlsx"), s
          across(contains("time"), hm)) %>% 
   select(city, date, contains("time")) %>% 
   mutate(sun_hours = sunset_time - sunrise_time,
-         sun_hours_int = as.numeric(sun_hours),
+         sun_hours_period = sun_hours,
+         sun_hours = as.numeric(sun_hours) / 3600,
          city = factor(city,
                        levels = c("Lund, Sweden",
                                   "Panama City, Panama",
                                   "Livingstone, Zambia",
-                                  "Cape Town, South Africa")))
+                                  "Cape Town, South Africa"))) %>% 
+    select(city, date, sun_hours, sun_hours_period)
 
-sun_hours_long %>%
-  select(city, date, sun_hours) %>%
+sun_hours %>%
+  select(-sun_hours_period) %>% 
   head(10) %>%
   gt() %>%
   tab_header(title = "Sunrise and sunset time") %>%
@@ -63,17 +71,18 @@ sun_hours_long %>%
     city = "City",
     date = "Date",
     sun_hours = "Hours between sunrise and sunset"
-  )
+  ) %>% 
+  tab_options(table.font.size = "small")
 ```
 
 ## Sun hours mapped onto y position
 
 ```{r}
-sun_hours_long %>%
-  mutate(sun_hours = as.numeric(sun_hours)) %>%
+#| fig-align: center
+sun_hours %>%
   ggplot(aes(x = date, y = sun_hours, color = city)) +
   geom_line(size = 1) +
-  scale_y_time() +
+  scale_y_continuous(labels = scales::number_format(accuracy = 1)) +
   scale_color_manual(
     name = NULL,
     values = c("#E69F00", "#56B4E9", "#009E73", "#CC79A7")
@@ -85,9 +94,9 @@ sun_hours_long %>%
 ## Sun hours mapped onto colour
 
 ```{r}
-sun_hours_long %>%
+#| fig-align: center
+sun_hours %>%
   mutate(
-    sun_hours = as.numeric(sun_hours) / 3600,
     month = month(date, label = T)
   ) %>%
   group_by(city, month) %>%
@@ -109,3 +118,180 @@ sun_hours_long %>%
   )
 ```
 
+# Creating aesthetic mappings in **ggplot**
+
+## We define the mapping with `aes()`
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(
+  data = sun_hours,
+  mapping = aes(x = date, y = sun_hours, colour = city)
+) + geom_line(size = 2)
+```
+
+## We define the mapping with `aes()`
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(
+  data = sun_hours,
+  mapping = aes(x = date, y = city, colour = sun_hours)
+) + geom_point(size = 5)
+```
+
+## We frequently omit argument names
+
+<br>
+
+Long form, all arguments are named:
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(
+  data = sun_hours,
+  mapping = aes(x = date, y = city, colour = sun_hours)
+) + geom_point(size = 5)
+```
+
+<br>
+
+Abbreviated form, common arguments remain unnamed:
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot(sun_hours, aes(x = date, y = city, colour = sun_hours)) + 
+  geom_point(size = 5)
+```
+
+## The geom determines how the data is shown
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(sun_hours, aes(date, sun_hours, colour = city)) + 
+  geom_line(size = 2)
+```
+
+## The geom determines how the data is shown
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(sun_hours, aes(date, city, colour = sun_hours)) + 
+  geom_point(size = 5)
+```
+
+
+## The geom determines how the data is shown
+
+```{r}
+#| include: false
+sun_hours <- sun_hours %>% 
+  mutate(month = month(date, label = T))
+```
+
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(sun_hours, aes(month, sun_hours, colour = city)) + 
+  geom_boxplot()
+```
+
+
+## The geom determines how the data is shown
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(sun_hours, aes(month, sun_hours, fill = city)) + 
+  geom_violin() +
+  facet_wrap(vars(city))
+```
+
+# Important: `colour` and `fill` apply to different elements
+
+## `colour` and `fill` apply to different elements
+
+:::{.incremental}
+
+- `colour` applies colour to points, lines, text, borders
+
+- `fill` applies colour to any filled areas
+
+:::
+
+## Many geoms have both `colour` and `fill` aesthetics
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(sun_hours, aes(month, sun_hours, colour = city)) + 
+  geom_boxplot()
+```
+
+
+## Many geoms have both `colour` and `fill` aesthetics
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(sun_hours, aes(month, sun_hours, fill = city)) + 
+  geom_boxplot()
+```
+
+
+## Many geoms have both `colour` and `fill` aesthetics
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(sun_hours, aes(month, sun_hours, colour = city, fill = city)) + 
+  geom_boxplot()
+```
+
+## Aesthetics can also be used as parameters in geoms
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(sun_hours, aes(month, sun_hours, fill = city)) + 
+  geom_boxplot(colour = "midnightblue")
+```
+
+
+## Aesthetics can also be used as parameters in geoms
+
+```{r}
+#| echo: true
+#| fig-align: center
+
+ggplot(sun_hours, aes(month, sun_hours, colour = city)) + 
+  geom_boxplot(fill = "midnightblue")
+```
+
+
+## Further reading
+
+- Fundamentals of Data Visualization: [Chapter 2: Visualizing data](https://clauswilke.com/dataviz/aesthetic-mapping.html)
+- Data Visualization—A Practical Introduction: [Chapter 3: Make a plot](https://socviz.co/makeplot.html#makeplot)
+- [**ggplot2** reference documentation](https://ggplot2.tidyverse.org/reference/index.html)
+- [**ggplot2** book](https://ggplot2-book.org/)
+- [**ggplot2** cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)

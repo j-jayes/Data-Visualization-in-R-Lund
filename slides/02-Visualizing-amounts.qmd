@@ -1,0 +1,24 @@
+---
+title: "Untitled"
+format: revealjs
+---
+
+```{r}
+
+artists <- tibble(
+  artist = c("ABBA", "Avicii", "José González", "Timbuktu", "Robyn"),
+  monthly_streams = c(23483532, 29468049, 4067263, 383274, 3110310)
+) %>%
+  arrange(desc(monthly_streams)) %>% 
+  mutate(rank = row_number())
+
+```
+
+
+```{r}
+artists %>%
+  ggplot(aes(monthly_streams, artist)) +
+  geom_col(fill = "midnightblue") +
+  scale_x_continuous(labels = scales::number_format())
+```
+
