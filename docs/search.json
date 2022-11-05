@@ -165,6 +165,48 @@
     "href": "slides_grid.html",
     "title": "Slides",
     "section": "",
-    "text": "00 Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n01 Aesthetic mappings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "00 Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n01 Aesthetic mappings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n02 Visualizing amounts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#we-often-encounter-datasets-containing-simple-amounts",
+    "href": "slides/02-Visualizing-amounts.html#we-often-encounter-datasets-containing-simple-amounts",
+    "title": "02 Visualizing amounts",
+    "section": "We often encounter datasets containing simple amounts",
+    "text": "We often encounter datasets containing simple amounts\n\n\n\n\n\n\n  \n    \n      Swedish musical artists\n    \n    \n  \n  \n    \n      Rank\n      Artist\n      Monthly listeners (m)\n    \n  \n  \n    1\nAvicii\n29.47\n    2\nABBA\n23.48\n    3\nJosé González\n4.07\n    4\nRobyn\n3.11\n    5\nTimbuktu\n0.38\n  \n  \n  \n    \n       Datasource: Spotify"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#we-can-visualize-amounts-with-bar-plots",
+    "href": "slides/02-Visualizing-amounts.html#we-can-visualize-amounts-with-bar-plots",
+    "title": "02 Visualizing amounts",
+    "section": "We can visualize amounts with bar plots",
+    "text": "We can visualize amounts with bar plots"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#bars-can-also-run-horizontally",
+    "href": "slides/02-Visualizing-amounts.html#bars-can-also-run-horizontally",
+    "title": "02 Visualizing amounts",
+    "section": "Bars can also run horizontally",
+    "text": "Bars can also run horizontally"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#avoid-rotated-axis-labels",
+    "href": "slides/02-Visualizing-amounts.html#avoid-rotated-axis-labels",
+    "title": "02 Visualizing amounts",
+    "section": "Avoid rotated axis labels",
+    "text": "Avoid rotated axis labels"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#avoid-rotated-axis-labels-1",
+    "href": "slides/02-Visualizing-amounts.html#avoid-rotated-axis-labels-1",
+    "title": "02 Visualizing amounts",
+    "section": "Avoid rotated axis labels",
+    "text": "Avoid rotated axis labels"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#pay-attention-to-the-order-of-the-bars",
+    "href": "slides/02-Visualizing-amounts.html#pay-attention-to-the-order-of-the-bars",
+    "title": "02 Visualizing amounts",
+    "section": "Pay attention to the order of the bars",
+    "text": "Pay attention to the order of the bars"
   }
 ]

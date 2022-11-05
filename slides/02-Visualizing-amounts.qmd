@@ -1,24 +1,234 @@
 ---
-title: "Untitled"
+title: "02 Visualizing amounts"
 format: revealjs
+image: "preview_img/02-visualizing-amounts.jfif"
+favicon: html/favicon.ico
 ---
 
 ```{r}
+#| include: false
+#| echo: false
 
-artists <- tibble(
-  artist = c("ABBA", "Avicii", "José González", "Timbuktu", "Robyn"),
-  monthly_streams = c(23483532, 29468049, 4067263, 383274, 3110310)
-) %>%
-  arrange(desc(monthly_streams)) %>% 
-  mutate(rank = row_number())
-
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(comment = "")
+library(tidyverse)
+library(here)
+library(cowplot)
+library(gt)
+# ggplot2 settings so plots scale well for slide size 
+theme_set(theme_gray(16)) # 16 for full width, 18 for half width 
+update_geom_defaults("point", list(size = 2)) # 2 for full width, 2.5 for half width
 ```
 
 
 ```{r}
+#| include: false
+#| echo: false
+
+artists <- tibble(
+  artist = c("ABBA", "Avicii", "José González", "Timbuktu", "Robyn"),
+  monthly_streamers = c(23483532, 29468049, 4067263, 383274, 3110310)
+) %>%
+  arrange(desc(monthly_streamers)) %>% 
+  mutate(rank = row_number(),
+         monthly_streamers = monthly_streamers / 1000000) %>% 
+  relocate(rank, .before = artist)
+
+```
+
+## We often encounter datasets containing simple amounts
+
+```{r}
+artists %>% 
+  gt() %>% 
+  tab_header(title = "Swedish musical artists") %>% 
+  fmt_number(monthly_streamers, decimals = 2) %>% 
+  cols_label(artist = "Artist",
+             monthly_streamers = "Monthly listeners (m)",
+             rank = "Rank") %>% 
+  tab_footnote("Datasource: Spotify")
+```
+
+## We can visualize amounts with bar plots
+
+```{r}
 artists %>%
-  ggplot(aes(monthly_streams, artist)) +
+  mutate(artist = fct_reorder(artist, rank)) %>% 
+  ggplot(aes(artist, monthly_streamers)) +
   geom_col(fill = "midnightblue") +
-  scale_x_continuous(labels = scales::number_format())
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(x = NULL,
+       y = "Monthly listeners (millions)") +
+    scale_x_discrete(
+      name = NULL,
+      expand = c(0, 0.4)
+    ) +
+    coord_cartesian(clip = "off") +
+    theme_minimal_hgrid(12, rel_small = 1) +
+    theme(
+      axis.line.x = element_blank(),
+      axis.ticks.x = element_blank()
+    )
+```
+
+## Bars can also run horizontally
+
+```{r}
+artists %>%
+  mutate(artist = fct_reorder(artist, desc(rank))) %>% 
+  ggplot(aes(artist, monthly_streamers)) +
+  geom_col(fill = "midnightblue") +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(x = NULL,
+       y = "Monthly listeners (millions)") +
+    scale_x_discrete(
+      name = NULL,
+      expand = c(0, 0.4)
+    ) +
+    coord_flip(clip = "off") +
+    theme_minimal_vgrid(12, rel_small = 1) +
+    theme(
+      axis.line.y = element_blank(),
+      axis.ticks.y = element_blank()
+    )
+```
+
+
+## Avoid rotated axis labels
+
+```{r}
+p <- artists %>%
+  mutate(artist = fct_reorder(artist, rank)) %>% 
+  ggplot(aes(artist, monthly_streamers)) +
+  geom_col(fill = "midnightblue") +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(x = NULL,
+       y = "Monthly listeners (millions)") +
+    scale_x_discrete(
+      name = NULL,
+      expand = c(0, 0.4)
+    ) +
+    coord_cartesian(clip = "off") +
+    theme_minimal_hgrid(12, rel_small = 1) +
+    theme(
+      axis.line.x = element_blank(),
+      axis.ticks.x = element_blank(),
+            axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+    )
+
+stamp_ugly(p)
+```
+
+## Avoid rotated axis labels
+
+```{r}
+artists %>%
+  mutate(artist = fct_reorder(artist, desc(rank))) %>% 
+  ggplot(aes(artist, monthly_streamers)) +
+  geom_col(fill = "midnightblue") +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(x = NULL,
+       y = "Monthly listeners (millions)") +
+    scale_x_discrete(
+      name = NULL,
+      expand = c(0, 0.4)
+    ) +
+    coord_flip(clip = "off") +
+    theme_minimal_vgrid(12, rel_small = 1) +
+    theme(
+      axis.line.y = element_blank(),
+      axis.ticks.y = element_blank()
+    )
+```
+
+## Pay attention to the order of the bars
+
+```{r}
+artists_noorder <- artists %>%
+  mutate(artist = factor(artist, levels = artist[c(2, 1, 5, 3, 4)])) %>% 
+  ggplot(aes(artist, monthly_streamers)) +
+  geom_col(fill = "midnightblue") +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(x = NULL,
+       y = "Monthly listeners (millions)") +
+    scale_x_discrete(
+      name = NULL,
+      expand = c(0, 0.4)
+    ) +
+    coord_flip(clip = "off") +
+    theme_minimal_vgrid(12, rel_small = 1) +
+    theme(
+      axis.line.y = element_blank(),
+      axis.ticks.y = element_blank()
+    )
+
+stamp_bad(artists_noorder)
+```
+
+## We can use dots instead of bars
+
+```{r}
+artists %>%
+  mutate(artist = fct_reorder(artist, desc(rank))) %>% 
+  ggplot(aes(artist, monthly_streamers)) +
+  geom_point(colour = "midnightblue", size = 4) +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(x = NULL,
+       y = "Monthly listeners (millions)") +
+    scale_x_discrete(
+      name = NULL,
+      expand = c(0, 0.4)
+    ) +
+    coord_flip(clip = "off") +
+    theme_minimal_vgrid(12, rel_small = 1) +
+    theme(
+      axis.line.y = element_blank(),
+      axis.ticks.y = element_blank()
+    )
+```
+
+## Dots are preferable if we want to truncate the axes
+
+```{r}
+df <- read_rds("slides/data/solar_panels_se.rds")
+
+df %>%
+  filter(
+    power_class == "Total",
+    nchar(region_code) == 4,
+    year == 2021
+  ) %>%
+  slice_max(installed_capacity_mw, n = 15) %>%
+  mutate(region = fct_reorder(region, installed_capacity_mw)) %>%
+  ggplot(aes(installed_capacity_mw, region)) +
+  geom_point(colour = "midnightblue", size = 4) +
+  # scale_x_continuous(limits = c(0, NA)) +
+  labs(
+    x = "Installed solar generating capacity (MW)",
+    y = "Kommun\n(top 15)"
+  )
+```
+
+
+## Dots are preferable if we want to truncate the axes
+
+```{r}
+df <- read_rds("slides/data/solar_panels_se.rds")
+
+df %>%
+  filter(
+    power_class == "Total",
+    nchar(region_code) == 4,
+    year == 2021
+  ) %>%
+  slice_max(installed_capacity_mw, n = 15) %>%
+  mutate(region = fct_reorder(region, installed_capacity_mw)) %>%
+  ggplot(aes(installed_capacity_mw, region)) +
+  geom_col(fill = "midnightblue") +
+  scale_x_continuous(limits = c(NA, 60)) +
+  labs(
+    x = "Installed solar generating capacity (MW)",
+    y = "Kommun\n(top 15)"
+  )
 ```
 
