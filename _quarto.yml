@@ -5,6 +5,7 @@ project:
     - "*.qmd"
     - "*.md"
     - "!files/"
+    - "!ingest/"
 
 website:
   title: "Data viz. in R {{< fa rainbow >}}"

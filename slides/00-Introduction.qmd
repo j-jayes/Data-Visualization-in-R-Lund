@@ -1,5 +1,9 @@
 ---
 title: "00 Introduction"
+title-slide-attributes:
+  data-background-image: "preview_img/00-planning.jfif"
+  data-background-size: "30%"
+  data-background-opacity: "0.6"
 format: revealjs
 image: "preview_img/00-planning.jfif"
 ---

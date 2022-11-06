@@ -1,8 +1,19 @@
 ---
 title: "01 Aesthetic mappings"
-format: revealjs
+title-slide-attributes:
+  data-background-image: "preview_img/01-aesthetic-mappings.jfif"
+  data-background-size: "30%"
+  data-background-opacity: "0.6"
+format: 
+  revealjs:
+    code-overflow: wrap
+    width: 1600
+    height: 900
+    fig-align: center
+    default-image-extension: svg
 image: "preview_img/01-aesthetic-mappings.jfif"
 favicon: html/favicon.ico
+
 ---
 
 ```{r}
@@ -33,37 +44,15 @@ update_geom_defaults("point", list(size = 2)) # 2 for full width, 2.5 for half w
 
 :::
 
-## Dataset:
-Daily average temperatures for various locations
+## Dataset:{.smaller}
+Daily hours between sunrise and sunset for various locations in 2022
 
 ```{r}
 #| echo: false
-sun_hours <- readxl::read_excel(here("slides", "data", "sun_times.xlsx"), skip = 2) %>% 
-  separate(day, into = c("day", "month", "year")) %>% 
-  separate(sunrise, into = c("sunrise_hour", "sunrise_min"), sep = "\\.") %>% 
-  separate(sunset, into = c("sunset_hour", "sunset_min"), sep = "\\.") %>% 
-  mutate(across(-city, parse_number)) %>% 
-  mutate(across(contains("min"), ~ 60/1000 * .x),
-         across(.cols = c(day, month, contains("hour")), ~ ifelse(nchar(.x) == 1, paste0("0", .x), .x))) %>% 
-  mutate(date = str_c(year, "-", month, "-", day),
-         date = ymd(date),
-         across(contains("min"), round),
-         sunrise_time = str_c(sunrise_hour, ":", sunrise_min),
-         sunset_time = str_c(sunset_hour, ":", sunset_min),
-         across(contains("time"), hm)) %>% 
-  select(city, date, contains("time")) %>% 
-  mutate(sun_hours = sunset_time - sunrise_time,
-         sun_hours_period = sun_hours,
-         sun_hours = as.numeric(sun_hours) / 3600,
-         city = factor(city,
-                       levels = c("Lund, Sweden",
-                                  "Panama City, Panama",
-                                  "Livingstone, Zambia",
-                                  "Cape Town, South Africa"))) %>% 
-    select(city, date, sun_hours, sun_hours_period)
+sun_hours <- read_rds(here::here("slides", "data", "sun_hours.rds"))
 
 sun_hours %>%
-  select(-sun_hours_period) %>% 
+  select(-sun_hours_period) %>%
   head(10) %>%
   gt() %>%
   tab_header(title = "Sunrise and sunset time") %>%
@@ -71,8 +60,9 @@ sun_hours %>%
     city = "City",
     date = "Date",
     sun_hours = "Hours between sunrise and sunset"
-  ) %>% 
-  tab_options(table.font.size = "small")
+  ) %>%
+  tab_footnote(footnote = md("Source: [Schools observatory](https://www.schoolsobservatory.org/learn/astro/nightsky/sunrs_set/sunrs_world)"))
+  
 ```
 
 ## Sun hours mapped onto y position
@@ -168,7 +158,7 @@ Abbreviated form, common arguments remain unnamed:
 #| echo: true
 #| eval: false
 
-ggplot(sun_hours, aes(x = date, y = city, colour = sun_hours)) + 
+ggplot(sun_hours, aes(date, city, colour = sun_hours)) + 
   geom_point(size = 5)
 ```
 

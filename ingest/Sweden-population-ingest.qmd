@@ -1,0 +1,44 @@
+---
+title: "Sweden's population"
+---
+
+```{r}
+library(tidyverse)
+
+library(rvest)
+```
+
+```{r}
+url <- "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/population/population-composition/population-statistics/pong/tables-and-graphs/population-statistics---year/population-in-the-country-counties-and-municipalities-on-31-december-2021-and-population-change-in-2021/"
+```
+
+### Ingest
+
+```{r}
+html <- read_html(url)
+
+table <- html %>% 
+  html_table()
+
+table <- table[[1]]
+
+table <- table %>% 
+  janitor::clean_names()
+
+table <- table %>% 
+  filter(row_number() != c(1, 2))
+
+table
+```
+
+### Feature engineering
+
+```{r}
+table <- table %>%
+  rename(region = x) %>%
+  mutate(across(.cols = c(-code, -region), .fns = ~ str_remove_all(.x, " ")))
+
+table %>% write_rds(here::here("slides", "data", "swedens_population.rds"))
+
+```
+

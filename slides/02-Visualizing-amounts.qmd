@@ -1,6 +1,16 @@
 ---
 title: "02 Visualizing amounts"
-format: revealjs
+title-slide-attributes:
+  data-background-image: "preview_img/02-visualizing-amounts.jfif"
+  data-background-size: "30%"
+  data-background-opacity: "0.6"
+format: 
+  revealjs:
+    code-overflow: wrap
+    width: 1600
+    height: 900
+    fig-align: center
+    default-image-extension: svg
 image: "preview_img/02-visualizing-amounts.jfif"
 favicon: html/favicon.ico
 ---
@@ -36,7 +46,7 @@ artists <- tibble(
 
 ```
 
-## We often encounter datasets containing simple amounts
+## We often encounter datasets containing simple amounts{.smaller}
 
 ```{r}
 artists %>% 
@@ -190,7 +200,7 @@ artists %>%
 ## Dots are preferable if we want to truncate the axes
 
 ```{r}
-df <- read_rds("slides/data/solar_panels_se.rds")
+df <- read_rds(here::here("slides", "data", "solar_panels_se.rds"))
 
 df %>%
   filter(
@@ -213,8 +223,6 @@ df %>%
 ## Dots are preferable if we want to truncate the axes
 
 ```{r}
-df <- read_rds("slides/data/solar_panels_se.rds")
-
 df %>%
   filter(
     power_class == "Total",
@@ -231,4 +239,26 @@ df %>%
     y = "Kommun\n(top 15)"
   )
 ```
+
+
+## Dots are preferable if we want to truncate the axes
+
+```{r}
+df %>%
+  filter(
+    power_class == "Total",
+    nchar(region_code) == 4,
+    year == 2021
+  ) %>%
+  slice_max(installed_capacity_mw, n = 15) %>%
+  mutate(region = fct_reorder(region, installed_capacity_mw)) %>%
+  ggplot(aes(installed_capacity_mw, region)) +
+  geom_col(fill = "midnightblue") +
+  scale_x_continuous(limits = c(NA, 60)) +
+  labs(
+    x = "Installed solar generating capacity (MW)",
+    y = "Kommun\n(top 15)"
+  )
+```
+
 

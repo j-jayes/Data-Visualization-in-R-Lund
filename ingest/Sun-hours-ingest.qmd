@@ -1,0 +1,34 @@
+---
+title: "Sun hours ingest"
+---
+
+```{r}
+library(tidyverse)
+
+sun_hours <- readxl::read_excel(here("slides", "data", "sun_times.xlsx"), skip = 2) %>% 
+  separate(day, into = c("day", "month", "year")) %>% 
+  separate(sunrise, into = c("sunrise_hour", "sunrise_min"), sep = "\\.") %>% 
+  separate(sunset, into = c("sunset_hour", "sunset_min"), sep = "\\.") %>% 
+  mutate(across(-city, parse_number)) %>% 
+  mutate(across(contains("min"), ~ 60/1000 * .x),
+         across(.cols = c(day, month, contains("hour")), ~ ifelse(nchar(.x) == 1, paste0("0", .x), .x))) %>% 
+  mutate(date = str_c(year, "-", month, "-", day),
+         date = ymd(date),
+         across(contains("min"), round),
+         sunrise_time = str_c(sunrise_hour, ":", sunrise_min),
+         sunset_time = str_c(sunset_hour, ":", sunset_min),
+         across(contains("time"), hm)) %>% 
+  select(city, date, contains("time")) %>% 
+  mutate(sun_hours = sunset_time - sunrise_time,
+         sun_hours_period = sun_hours,
+         sun_hours = as.numeric(sun_hours) / 3600,
+         city = factor(city,
+                       levels = c("Lund, Sweden",
+                                  "Panama City, Panama",
+                                  "Livingstone, Zambia",
+                                  "Cape Town, South Africa"))) %>% 
+    select(city, date, sun_hours, sun_hours_period)
+
+sun_hours %>% write_rds(here::here("slides", "data", "sun_hours.rds"))
+```
+

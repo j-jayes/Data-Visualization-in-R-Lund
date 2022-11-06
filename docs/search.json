@@ -23,21 +23,21 @@
   {
     "objectID": "slides/00-Introduction.html#quarto",
     "href": "slides/00-Introduction.html#quarto",
-    "title": "00-Introduction",
+    "title": "00 Introduction",
     "section": "Quarto",
     "text": "Quarto\nQuarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see https://quarto.org/docs/presentations/."
   },
   {
     "objectID": "slides/00-Introduction.html#bullets",
     "href": "slides/00-Introduction.html#bullets",
-    "title": "00-Introduction",
+    "title": "00 Introduction",
     "section": "Bullets",
     "text": "Bullets\nWhen you click the Render button a document will be generated that includes:\n\nContent authored with markdown\nOutput from executable code"
   },
   {
     "objectID": "slides/00-Introduction.html#code",
     "href": "slides/00-Introduction.html#code",
-    "title": "00-Introduction",
+    "title": "00 Introduction",
     "section": "Code",
     "text": "Code\nWhen you click the Render button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n\n[1] 2"
   },
@@ -46,7 +46,7 @@
     "href": "slides/01-Aesthetic-mappings.html#dataset",
     "title": "01 Aesthetic mappings",
     "section": "Dataset:",
-    "text": "Dataset:\nDaily average temperatures for various locations\n\n\n\n\n\n\n  \n    \n      Sunrise and sunset time\n    \n    \n  \n  \n    \n      City\n      Date\n      Hours between sunrise and sunset\n    \n  \n  \n    Cape Town, South Africa\n2022-01-01\n14.55000\n    Cape Town, South Africa\n2022-01-02\n14.53333\n    Cape Town, South Africa\n2022-01-03\n14.53333\n    Cape Town, South Africa\n2022-01-04\n14.51667\n    Cape Town, South Africa\n2022-01-05\n14.50000\n    Cape Town, South Africa\n2022-01-06\n14.48333\n    Cape Town, South Africa\n2022-01-07\n14.46667\n    Cape Town, South Africa\n2022-01-08\n14.45000\n    Cape Town, South Africa\n2022-01-09\n14.43333\n    Cape Town, South Africa\n2022-01-10\n14.41667"
+    "text": "Dataset:\nDaily hours between sunrise and sunset for various locations in 2022\n\n\n\n\n\n\n  \n    \n      Sunrise and sunset time\n    \n    \n  \n  \n    \n      City\n      Date\n      Hours between sunrise and sunset\n      month\n    \n  \n  \n    Cape Town, South Africa\n2022-01-01\n14.55000\nJan\n    Cape Town, South Africa\n2022-01-02\n14.53333\nJan\n    Cape Town, South Africa\n2022-01-03\n14.53333\nJan\n    Cape Town, South Africa\n2022-01-04\n14.51667\nJan\n    Cape Town, South Africa\n2022-01-05\n14.50000\nJan\n    Cape Town, South Africa\n2022-01-06\n14.48333\nJan\n    Cape Town, South Africa\n2022-01-07\n14.46667\nJan\n    Cape Town, South Africa\n2022-01-08\n14.45000\nJan\n    Cape Town, South Africa\n2022-01-09\n14.43333\nJan\n    Cape Town, South Africa\n2022-01-10\n14.41667\nJan\n  \n  \n  \n    \n       Source: Schools observatory"
   },
   {
     "objectID": "slides/01-Aesthetic-mappings.html#sun-hours-mapped-onto-y-position",
@@ -81,7 +81,7 @@
     "href": "slides/01-Aesthetic-mappings.html#we-frequently-omit-argument-names",
     "title": "01 Aesthetic mappings",
     "section": "We frequently omit argument names",
-    "text": "We frequently omit argument names\n\nLong form, all arguments are named:\n\nggplot(\n  data = sun_hours,\n  mapping = aes(x = date, y = city, colour = sun_hours)\n) + geom_point(size = 5)\n\n\nAbbreviated form, common arguments remain unnamed:\n\nggplot(sun_hours, aes(x = date, y = city, colour = sun_hours)) + \n  geom_point(size = 5)"
+    "text": "We frequently omit argument names\n\nLong form, all arguments are named:\n\nggplot(\n  data = sun_hours,\n  mapping = aes(x = date, y = city, colour = sun_hours)\n) + geom_point(size = 5)\n\n\nAbbreviated form, common arguments remain unnamed:\n\nggplot(sun_hours, aes(date, city, colour = sun_hours)) + \n  geom_point(size = 5)"
   },
   {
     "objectID": "slides/01-Aesthetic-mappings.html#the-geom-determines-how-the-data-is-shown",
@@ -161,13 +161,6 @@
     "text": "Further reading\n\nFundamentals of Data Visualization: Chapter 2: Visualizing data\nData Visualization—A Practical Introduction: Chapter 3: Make a plot\nggplot2 reference documentation\nggplot2 book\nggplot2 cheatsheet"
   },
   {
-    "objectID": "slides_grid.html",
-    "href": "slides_grid.html",
-    "title": "Slides",
-    "section": "",
-    "text": "00 Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n01 Aesthetic mappings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n02 Visualizing amounts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "slides/02-Visualizing-amounts.html#we-often-encounter-datasets-containing-simple-amounts",
     "href": "slides/02-Visualizing-amounts.html#we-often-encounter-datasets-containing-simple-amounts",
     "title": "02 Visualizing amounts",
@@ -208,5 +201,89 @@
     "title": "02 Visualizing amounts",
     "section": "Pay attention to the order of the bars",
     "text": "Pay attention to the order of the bars"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#we-can-use-dots-instead-of-bars",
+    "href": "slides/02-Visualizing-amounts.html#we-can-use-dots-instead-of-bars",
+    "title": "02 Visualizing amounts",
+    "section": "We can use dots instead of bars",
+    "text": "We can use dots instead of bars"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#dots-are-preferable-if-we-want-to-truncate-the-axes",
+    "href": "slides/02-Visualizing-amounts.html#dots-are-preferable-if-we-want-to-truncate-the-axes",
+    "title": "02 Visualizing amounts",
+    "section": "Dots are preferable if we want to truncate the axes",
+    "text": "Dots are preferable if we want to truncate the axes"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#dots-are-preferable-if-we-want-to-truncate-the-axes-1",
+    "href": "slides/02-Visualizing-amounts.html#dots-are-preferable-if-we-want-to-truncate-the-axes-1",
+    "title": "02 Visualizing amounts",
+    "section": "Dots are preferable if we want to truncate the axes",
+    "text": "Dots are preferable if we want to truncate the axes"
+  },
+  {
+    "objectID": "slides/02-Visualizing-amounts.html#dots-are-preferable-if-we-want-to-truncate-the-axes-2",
+    "href": "slides/02-Visualizing-amounts.html#dots-are-preferable-if-we-want-to-truncate-the-axes-2",
+    "title": "02 Visualizing amounts",
+    "section": "Dots are preferable if we want to truncate the axes",
+    "text": "Dots are preferable if we want to truncate the axes"
+  },
+  {
+    "objectID": "slides/03-Coordinate-systems-and-axes.html#example-population-of-swedish-municipalities",
+    "href": "slides/03-Coordinate-systems-and-axes.html#example-population-of-swedish-municipalities",
+    "title": "03 Coordinate systems and axes",
+    "section": "Example: Population of Swedish municipalities",
+    "text": "Example: Population of Swedish municipalities\nA linear scale emphasizes large counties"
+  },
+  {
+    "objectID": "slides/03-Coordinate-systems-and-axes.html#example-population-of-swedish-municipalities-1",
+    "href": "slides/03-Coordinate-systems-and-axes.html#example-population-of-swedish-municipalities-1",
+    "title": "03 Coordinate systems and axes",
+    "section": "Example: Population of Swedish municipalities",
+    "text": "Example: Population of Swedish municipalities\nA log scale shows symmetry around the median"
+  },
+  {
+    "objectID": "slides/03-Coordinate-systems-and-axes.html#nonlinear-coordinate-systems-polar-coordinates",
+    "href": "slides/03-Coordinate-systems-and-axes.html#nonlinear-coordinate-systems-polar-coordinates",
+    "title": "03 Coordinate systems and axes",
+    "section": "Nonlinear coordinate systems: Polar coordinates",
+    "text": "Nonlinear coordinate systems: Polar coordinates"
+  },
+  {
+    "objectID": "slides/03-Coordinate-systems-and-axes.html#cartesian-vs-polar-coordinates",
+    "href": "slides/03-Coordinate-systems-and-axes.html#cartesian-vs-polar-coordinates",
+    "title": "03 Coordinate systems and axes",
+    "section": "Cartesian vs polar coordinates",
+    "text": "Cartesian vs polar coordinates"
+  },
+  {
+    "objectID": "slides/03-Coordinate-systems-and-axes.html#scale-functions-customize-the-x-and-y-axes",
+    "href": "slides/03-Coordinate-systems-and-axes.html#scale-functions-customize-the-x-and-y-axes",
+    "title": "03 Coordinate systems and axes",
+    "section": "Scale functions customize the x and y axes",
+    "text": "Scale functions customize the x and y axes\nRecall the musical artists example from a prior lecture\n\n\nggplot(artists, \n       aes(monthly_streamers, \n           fct_reorder(artist, monthly_streamers))) +\n  geom_col()"
+  },
+  {
+    "objectID": "slides/03-Coordinate-systems-and-axes.html#scale-functions-customize-the-x-and-y-axes-1",
+    "href": "slides/03-Coordinate-systems-and-axes.html#scale-functions-customize-the-x-and-y-axes-1",
+    "title": "03 Coordinate systems and axes",
+    "section": "Scale functions customize the x and y axes",
+    "text": "Scale functions customize the x and y axes\nAdd scale functions (no change in figure so far)\n\n\nggplot(artists, \n       aes(monthly_streamers, \n           fct_reorder(artist, monthly_streamers))) +\n  geom_col() +\n  scale_x_continuous() +\n  scale_y_discrete()"
+  },
+  {
+    "objectID": "slides/03-Coordinate-systems-and-axes.html#scale-functions-customize-the-x-and-y-axes-2",
+    "href": "slides/03-Coordinate-systems-and-axes.html#scale-functions-customize-the-x-and-y-axes-2",
+    "title": "03 Coordinate systems and axes",
+    "section": "Scale functions customize the x and y axes",
+    "text": "Scale functions customize the x and y axes\nThe parameter name sets the axis title\n\n\nggplot(artists, \n       aes(monthly_streamers, \n           fct_reorder(artist, monthly_streamers))) +\n  geom_col() +\n  scale_x_continuous(\n    name = \"Monthly streamers\"\n  ) +\n  scale_y_discrete(\n    name = NULL # no axis title\n  )\n\n\n\n\n\n\n\n\n\n\n\n\nNote: We could do the same with xlab() and ylab()"
+  },
+  {
+    "objectID": "slides_grid.html",
+    "href": "slides_grid.html",
+    "title": "Slides",
+    "section": "",
+    "text": "00 Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n01 Aesthetic mappings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n02 Visualizing amounts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n03 Coordinate systems and axes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
