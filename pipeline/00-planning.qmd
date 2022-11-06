@@ -15,6 +15,28 @@ Motivate for a course in data visualization.
 
 - How does the department benefit?
 
+Maybe 3 things I want to motivate for in terms of why the topic:
+
+1. 
+
+1. Data is the new oil / marketable skills
+
+1. 
+
+
+Maybe 3 things I want to motivate for in terms of why the mechanism:
+
+1. Reproducible workflow
+
+2. Ecosystem that keeps your work in one place
+
+3. "It just works"
+
+
+
+####
+
+
 ### Styling
 
 #### Images
@@ -26,3 +48,7 @@ I will use a consistent prompt to get images in a similar style.
 I will settle on one, but let's try and find some good ideas in the meantime.
 
 "a still-life painting of [theme] in the style of Paul Cézanne, hyper realistic, beautiful, ArtStation trending"
+
+### Navigation
+
+Want to make a home button on the slides that takes you back to slides_grid.qmd

@@ -8,21 +8,48 @@ format: revealjs
 image: "preview_img/00-planning.jfif"
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
-
-## Bullets
-
-When you click the **Render** button a document will be generated that includes:
-
--   Content authored with markdown
--   Output from executable code
-
-## Code
-
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
-
 ```{r}
-1 + 1
+#| code-line-numbers: "|3"
+#| fig-cap: !expr glue::glue("The mean temperature was {mean(airquality$Temp) |> round()}")
+#| fig-alt: |
+#|   "A scatterplot with temperature by ozone levels along with a trend line
+#|   indicating the increase in temperature with increasing ozone levels."
+
+library(tidyverse)
+ggplot(airquality, aes(Ozone, Temp)) + 
+        geom_point() + 
+        geom_smooth(method = "loess", se = FALSE)
 ```
+
+## Why Data Visualization? {auto-animate=true auto-animate-easing="ease-in-out"}
+
+::: {.r-hstack}
+::: {data-id="box1" auto-animate-delay="0" style="background: #E69F00; width: 300px; height: 150px; margin: 10px; text-align:center;"}
+Programming
+:::
+
+::: {data-id="box2" auto-animate-delay="0.1" style="background: #56B4E9; width: 300px; height: 150px; margin: 10px; text-align:center;"}
+Statistics
+:::
+
+::: {data-id="box3" auto-animate-delay="0.2" style="background: #009E73; width: 300px; height: 150px; margin: 10px; text-align:center;"}
+Communication
+:::
+:::
+
+
+## Why Data Visualization? {auto-animate=true auto-animate-easing="ease-in-out"}
+
+::: {.r-stack}
+::: {data-id="box1" style="background: #E69F00; width: 350px; height: 350px; border-radius: 200px;"}
+:::
+
+::: {data-id="box2" style="background: #56B4E9; width: 250px; height: 250px; border-radius: 200px;"}
+:::
+
+::: {data-id="box3" style="background: #009E73; width: 150px; height: 150px; border-radius: 200px;"}
+:::: {.fragment style="text-align:center;"}
+Data Science
+::::
+:::
+:::

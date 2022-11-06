@@ -11,11 +11,15 @@ format:
     height: 900
     fig-align: center
     default-image-extension: svg
+    footer: "[{{< fa house >}}](https://j-jayes.github.io/Data-Visualization-in-R-Lund/)"
 image: "preview_img/03-coordinate-systems-and-axes.jfif"
 favicon: html/favicon.ico
 ---
 
 ```{r}
+#| echo: false
+#| include: false
+
 library(tidyverse)
 library(lubridate)
 library(ggrepel)
@@ -28,17 +32,21 @@ theme_set(theme_gray(16)) # 16 for full width, 18 for half width
 df <- read_rds(here::here("slides", "data", "swedens_population.rds"))
 ```
 
-```{r}
-median_pop <- df %>% 
-  summarise(median(population)) %>% 
-  pull()
-```
+## Most data visualizations use Cartesian coordinates
+
+## Changing the units does not change the plot
+
+
 
 ## Example: Population of Swedish municipalities
 
 A linear scale emphasizes large counties
 
 ```{r}
+
+median_pop <- df %>% 
+  summarise(median(population)) %>% 
+  pull()
 library(ggrepel)
 
 df %>%
@@ -92,12 +100,12 @@ df %>%
 
 ## Nonlinear coordinate systems: Polar coordinates
 
-::::: {.columns}
-
-:::: {.column width="50%"}
-
-
 ```{r}
+#| layout-ncol: 2
+#| fig-height: 8
+#| fig-cap:
+#|   - "Cartesian coordinates"
+#|   - "Polar coordinates"
 
 df_points <- tibble(
   x = c(1, 3.5, 0),
@@ -114,6 +122,7 @@ df_segments <- tibble(
   y0 = c(0, 0, 0, 0, 1, 2, 3, 4),
   y1 = c(4, 4, 4, 4, 1, 2, 3, 4)
 )
+
 ggplot(df_points, aes(x, y)) +
   geom_point(size = 2, color = "#0072B2") +
   geom_text(
@@ -136,15 +145,6 @@ ggplot(df_points, aes(x, y)) +
     axis.ticks = element_blank(),
     axis.ticks.length = grid::unit(0, "pt")
   )
-```
-
-::::
-
-:::: {.column width="50%"}
-
-::: {.fragment}
-
-```{r}
 
 ggplot(df_points, aes(x, y)) +
   geom_segment(
@@ -176,20 +176,16 @@ ggplot(df_points, aes(x, y)) +
   )
 ```
 
-:::
-
-::::
-
-:::::
 
 ## Cartesian vs polar coordinates
 
-::::: {.columns}
-
-:::: {.column width="50%"}
-
-
 ```{r}
+#| layout-ncol: 2
+#| fig-height: 8
+#| fig-cap:
+#|   - "Cartesian coordinates"
+#|   - "Polar coordinates"
+
 sun_hours <- read_rds(here::here("slides", "data", "sun_hours.rds"))
 
 #| fig-align: center
@@ -202,15 +198,10 @@ sun_hours %>%
     values = c("#E69F00", "#56B4E9", "#009E73", "#CC79A7")
   ) +
   theme_minimal_grid(16) +
-  labs(x = NULL, y = "Hours between sunrise and sunet")
+  labs(x = NULL, y = "Hours between sunrise and sunet") +
+  theme(legend.position = "bottom")
 
-```
 
-::::
-
-:::: {.column width="50%"}
-
-```{r}
 sun_hours %>%
   ggplot(aes(x = date, y = sun_hours, color = city)) +
   geom_line(size = 1) +
@@ -221,13 +212,10 @@ sun_hours %>%
   ) +
   coord_polar() +
   theme_minimal_grid(16) +
-  labs(x = NULL, y = "Hours between sunrise and sunet")
+  labs(x = NULL, y = "Hours between sunrise and sunet")  +
+  theme(legend.position = "bottom")
 ```
 
-
-::::
-
-::::
 
 # Scales and coordinate systems in **ggplot2**
 

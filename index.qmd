@@ -2,10 +2,7 @@
 title: "Homepage"
 ---
 
-This is a Quarto website.
+This site contains the contents of the course Data Visualization in R for Economic Historians.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+It borrows extensively from the course put together by Claus O. Wilke, the author of the course textbook, Fundamentals of Data Visualization.
 
-```{r}
-1 + 1
-```

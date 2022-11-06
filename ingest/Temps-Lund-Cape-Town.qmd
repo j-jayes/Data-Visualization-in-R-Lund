@@ -1,0 +1,119 @@
+---
+title: "Temperatures"
+---
+
+## Purpose
+
+Ingest and tidy the temperature data for Lund and Cape Town
+
+```{r}
+library(tidyverse)
+library(zoo)
+
+df <- readxl::read_excel(here::here("ingest/Lund_Cape_Town_temps.xlsx"))
+
+dates <- seq.Date(lubridate::ymd("2022/01/01"), lubridate::ymd("2022/12/31"), by = "day") %>% 
+  as_tibble() %>% 
+  rename(date = value)
+```
+
+Lund
+
+```{r}
+df_lund <- dates %>% 
+  left_join(df %>% 
+  filter(city == "Lund"))
+
+
+min_val <- df_lund %>% 
+  filter(!is.na(temp)) %>% 
+  head(1) %>% 
+  pull(temp)
+
+max_val <- df_lund %>% 
+  filter(!is.na(temp)) %>% 
+  tail(1) %>% 
+  pull(temp)
+
+
+df_lund <- df_lund %>% 
+  mutate(temp = case_when(
+    row_number() == 1 ~ min_val,
+    row_number() == 365 ~ max_val,
+    TRUE ~ temp
+  )) %>% 
+  mutate(temp_new = na.approx(temp),
+         city = "Lund",
+         date = lubridate::ymd(date)) %>% 
+  select(date, city, temp_c = temp_new)
+```
+
+Cape Town
+
+```{r}
+df_ct <- dates %>% 
+  left_join(df %>% 
+  filter(city == "Cape Town"))
+
+
+min_val <- df_ct %>% 
+  filter(!is.na(temp)) %>% 
+  head(1) %>% 
+  pull(temp)
+
+max_val <- df_ct %>% 
+  filter(!is.na(temp)) %>% 
+  tail(1) %>% 
+  pull(temp)
+
+
+df_ct <- df_ct %>% 
+  mutate(temp = case_when(
+    row_number() == 1 ~ min_val,
+    row_number() == 365 ~ max_val,
+    TRUE ~ temp
+  )) %>% 
+  mutate(temp_new = na.approx(temp),
+         city = "Cape Town",
+         date = lubridate::ymd(date)) %>% 
+  select(date, city, temp_c = temp_new)
+```
+
+Combine
+
+```{r}
+df <- df_ct %>% 
+  bind_rows(df_lund)
+```
+
+
+```{r}
+df <- df %>% 
+  arrange(date) %>% 
+  mutate(temp_f = temp_c * 9/5 + 32)
+```
+
+
+```{r}
+df %>%
+  select(-temp_f) %>%
+  pivot_wider(names_from = city, values_from = temp_c) %>%
+  ggplot(aes(`Cape Town`, Lund)) +
+  geom_path() +
+  coord_equal()
+```
+
+
+```{r}
+df %>%
+  select(-temp_f) %>%
+  group_by(city, week(date)) %>%
+  mutate(temp_c = mean(temp_c)) %>%
+  ungroup() %>%
+  pivot_wider(names_from = city, values_from = temp_c) %>%
+  ggplot(aes(`Cape Town`, Lund)) +
+  geom_path() +
+  coord_equal(xlim = c(0, 22),
+              ylim = c(0, 22))
+```
+

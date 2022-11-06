@@ -249,14 +249,14 @@
     "href": "slides/03-Coordinate-systems-and-axes.html#nonlinear-coordinate-systems-polar-coordinates",
     "title": "03 Coordinate systems and axes",
     "section": "Nonlinear coordinate systems: Polar coordinates",
-    "text": "Nonlinear coordinate systems: Polar coordinates"
+    "text": "Nonlinear coordinate systems: Polar coordinates\n\n\n\n\n\n\nCartesian coordinates\n\n\n\n\n\n\n\nPolar coordinates"
   },
   {
     "objectID": "slides/03-Coordinate-systems-and-axes.html#cartesian-vs-polar-coordinates",
     "href": "slides/03-Coordinate-systems-and-axes.html#cartesian-vs-polar-coordinates",
     "title": "03 Coordinate systems and axes",
     "section": "Cartesian vs polar coordinates",
-    "text": "Cartesian vs polar coordinates"
+    "text": "Cartesian vs polar coordinates\n\n\n\n\n\n\nCartesian coordinates\n\n\n\n\n\n\n\nPolar coordinates"
   },
   {
     "objectID": "slides/03-Coordinate-systems-and-axes.html#scale-functions-customize-the-x-and-y-axes",
@@ -285,5 +285,47 @@
     "title": "Slides",
     "section": "",
     "text": "00 Introduction\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n01 Aesthetic mappings\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n02 Visualizing amounts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n03 Coordinate systems and axes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "slides/03-Coordinate-systems-and-axes.html#nonlinear-coordinate-systems-polar-coordinates-1",
+    "href": "slides/03-Coordinate-systems-and-axes.html#nonlinear-coordinate-systems-polar-coordinates-1",
+    "title": "03 Coordinate systems and axes",
+    "section": "Nonlinear coordinate systems: Polar coordinates",
+    "text": "Nonlinear coordinate systems: Polar coordinates\n\n\n\n\n\n\nCartesian coordinates\n\n\n\n\n\n\n\nPolar coordinates"
+  },
+  {
+    "objectID": "slides/00-Introduction.html#section",
+    "href": "slides/00-Introduction.html#section",
+    "title": "00 Introduction",
+    "section": "",
+    "text": "Programming\n\n\nStatistics\n\n\nCommunication"
+  },
+  {
+    "objectID": "slides/00-Introduction.html#section-1",
+    "href": "slides/00-Introduction.html#section-1",
+    "title": "00 Introduction",
+    "section": "",
+    "text": "Data Vis."
+  },
+  {
+    "objectID": "slides/00-Introduction.html#section-2",
+    "href": "slides/00-Introduction.html#section-2",
+    "title": "00 Introduction",
+    "section": "",
+    "text": "Data Science"
+  },
+  {
+    "objectID": "slides/00-Introduction.html#why-data-visualization",
+    "href": "slides/00-Introduction.html#why-data-visualization",
+    "title": "00 Introduction",
+    "section": "Why Data Visualization?",
+    "text": "Why Data Visualization?\n\n\nProgramming\n\n\nStatistics\n\n\nCommunication"
+  },
+  {
+    "objectID": "slides/00-Introduction.html#why-data-visualization-1",
+    "href": "slides/00-Introduction.html#why-data-visualization-1",
+    "title": "00 Introduction",
+    "section": "Why Data Visualization?",
+    "text": "Why Data Visualization?\n\n\n\n\n\n\n\n\n\nData Science"
   }
 ]
